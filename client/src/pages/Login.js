@@ -1,24 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
     })
+    const { login } = useLogin()
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(credentials)
-        })
-        const json = await response.json()
-        const token = await json.token
-        if (response.ok) {
-            localStorage.setItem('user', JSON.stringify(token))
-            
-        }
+        login(credentials)
     }
     return (
         <div className="flex flex-col mx-auto max-w-md p-6 rounded-md sm:p-10 bg-gray-50 text-gray-800">
@@ -29,7 +21,7 @@ const Login = () => {
             <form onSubmit={handleSubmit} className="space-y-12 ng-untouched ng-pristine ng-valid">
                 <div className="space-y-4">
                     <div>
-                        <label for="email" className="block mb-2 text-sm">Email address</label>
+                        <label htmlFor="email" className="block mb-2 text-sm">Email address</label>
                         <input required value={credentials.email} onChange={(e) => setCredentials({
                             ...credentials,
                             email: e.target.value
@@ -37,8 +29,8 @@ const Login = () => {
                     </div>
                     <div>
                         <div className="flex justify-between mb-2">
-                            <label for="password" className="text-sm">Password</label>
-                            <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-600">Forgot password?</a>
+                            <label htmlFor="password" className="text-sm">Password</label>
+                            <Link className="text-xs hover:underline text-gray-600">Forgot password?</Link>
                         </div>
                         <input required value={credentials.password} onChange={(e) => setCredentials({
                             ...credentials,

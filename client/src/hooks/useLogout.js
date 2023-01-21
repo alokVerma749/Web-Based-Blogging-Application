@@ -1,16 +1,16 @@
 import { AuthContext } from "../contexts/AuthContext"
 import { useContext } from "react"
 export const useLogout = () => {
-    const { user, setUser } = useContext(AuthContext)
-    if (!user) {
+    const { setUser } = useContext(AuthContext)
+    if (!setUser) {
         throw new Error('user not exists')
     }
-    const logout = () => {
-        const token = JSON.parse(localStorage.getItem('user'))
+    const logout = async () => {
+        await setUser(null)
+        const token = localStorage.removeItem('user')
         if (!token) {
-            localStorage.removeItem('user')
-            setUser(null)
         }
+        localStorage.removeItem('user')
     }
     return { logout }
 }

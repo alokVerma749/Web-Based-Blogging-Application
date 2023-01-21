@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
     const [credentials, setCredentials] = useState({
@@ -7,6 +7,7 @@ const Signup = () => {
         email: '',
         password: ''
     })
+    const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -20,6 +21,7 @@ const Signup = () => {
             console.log(json)
             if (!response.ok) {
                 console.log('signup success')
+                navigate('/auth/login')
             }
         } catch (error) {
             throw new Error(error.message)
@@ -34,14 +36,14 @@ const Signup = () => {
             <form onSubmit={handleSubmit} className="space-y-12 ng-untouched ng-pristine ng-valid">
                 <div className="space-y-4">
                     <div>
-                        <label for="name" className="block mb-2 text-sm">Name</label>
+                        <label htmlFor="name" className="block mb-2 text-sm">Name</label>
                         <input value={credentials.name} onChange={(e) => setCredentials({
                             ...credentials,
                             name: e.target.value
                         })} type="name" name="text" id="name" placeholder="your name here...." className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800" />
                     </div>
                     <div>
-                        <label for="email" className="block mb-2 text-sm">Email address</label>
+                        <label htmlFor="email" className="block mb-2 text-sm">Email address</label>
                         <input value={credentials.email} onChange={(e) => setCredentials({
                             ...credentials,
                             email: e.target.value
@@ -49,8 +51,8 @@ const Signup = () => {
                     </div>
                     <div>
                         <div className="flex justify-between mb-2">
-                            <label for="password" className="text-sm">Password</label>
-                            <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-600">Forgot password?</a>
+                            <label htmlFor="password" className="text-sm">Password</label>
+                            <Link rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-600">Forgot password?</Link>
                         </div>
                         <input value={credentials.password} onChange={(e) => setCredentials({
                             ...credentials,
