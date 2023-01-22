@@ -2,7 +2,7 @@ import { AllBlogsContext } from "../contexts/AllBlogsContext.js"
 import { useContext } from "react"
 
 export const useFetchAllBlogs = () => {
-    const { blogs, setBlogs } = useContext(AllBlogsContext)
+    const { setBlogs } = useContext(AllBlogsContext)
     try {
         const fetchAllBlogs = async () => {
             const response = await fetch('/', {

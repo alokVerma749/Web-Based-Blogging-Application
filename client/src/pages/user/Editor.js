@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useContext } from "react"
-import { AuthContext } from "../contexts/AuthContext.js"
+import { AuthContext } from "../../contexts/AuthContext.js"
 
 const Editor = () => {
     const { user } = useContext(AuthContext)

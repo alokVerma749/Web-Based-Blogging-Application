@@ -4,9 +4,9 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import MyBlogs from './pages/MyBlogs'
+import MyBlogs from './pages/user/MyBlogs'
 import NotFound from './pages/NotFound'
-import Editor from './pages/Editor';
+import Editor from './pages/user/Editor';
 import { AuthContext } from './contexts/AuthContext';
 import { useContext } from 'react'
 

@@ -1,8 +1,8 @@
-import { AllBlogsContext } from "../contexts/AllBlogsContext.js"
+import { UserContext } from "../contexts/UserBlogsContext.js"
 import { useContext } from "react"
 
-export const useFetchData = () => {
-    const { setBlogs, setIsLoading } = useContext(AllBlogsContext)
+export const useFetchUserBlogs = () => {
+    const { setUserBlogs, setIsLoading } = useContext(UserContext)
     const fetchBlogs = async () => {
         setIsLoading(true)
         const response = await fetch('/user/', {
@@ -11,7 +11,7 @@ export const useFetchData = () => {
         const json = await response.json()
         if (response.ok) {
             const data = json.blogs
-            setBlogs(data)
+            setUserBlogs(data)
             setIsLoading(false)
         }
     }
