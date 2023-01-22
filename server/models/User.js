@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 const { Schema } = mongoose
+import { AuthRoles } from '../utils/AuthRoles.js'
 
 const userSchema = new Schema({
     name: {
@@ -18,7 +19,12 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    role: {
+        type: String,
+        enum: Object.values(AuthRoles),
+        default: AuthRoles.USER
+    },
 })
 
 

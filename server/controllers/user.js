@@ -1,5 +1,41 @@
 import Blog from '../models/Blog.js'
 
+export const createBlog = async (req, res) => {
+    try {
+        const user_id = req.user.userid._id
+        console.log(user_id)
+        const data = req.body
+        if (!user_id) {
+            return res.status(400)({
+                success: false,
+                message: 'user id not found'
+            })
+        }
+        const blog = await Blog.create(
+            {
+                title: data.title,
+                body: data.content,
+                user_id: user_id,
+                createdAt: Date.now()
+            }
+        )
+        if (!blog) {
+            return res.status(200).json({
+                success: false,
+                message: 'blogs creation failed',
+            })
+        }
+        res.status(200).json({
+            success: true,
+            message: 'blogs created successfully',
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
 export const getMyBlogs = async (req, res) => {
     try {
         const user_id = req.user.userid._id

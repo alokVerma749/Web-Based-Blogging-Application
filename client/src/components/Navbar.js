@@ -17,7 +17,7 @@ const Navbar = () => {
                 <nav className="md:ml-auto md:mr-auto space-x-3 flex flex-wrap items-center text-base justify-center">
                     <NavLink to='/' className="mr-5 hover:text-gray-900">Home</NavLink>
                     <NavLink to='/user' className="mr-5 hover:text-gray-900">My Blogs</NavLink>
-                    <NavLink to='/blogs' className="mr-5 hover:text-gray-900">About</NavLink>
+                    <NavLink to='/user/createblog' className="mr-5 hover:text-gray-900">Create Blog</NavLink>
                     <NavLink to='/blogs' className="mr-5 hover:text-gray-900">Contact Us</NavLink>
                 </nav>
                 <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">

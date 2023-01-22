@@ -2,6 +2,7 @@ import Blog from '../models/Blog.js'
 
 export const getBlogs = async (req, res) => {
     try {
+        console.log(req)
         const blogs = await Blog.find({})
         if (!blogs) {
             return res.status(404)({
@@ -11,7 +12,7 @@ export const getBlogs = async (req, res) => {
         }
         res.status(200).json({
             success: true,
-            message: 'blogs fetched successfully',
+            message: 'blogs fetched successfullyy',
             blogs
         })
     } catch (error) {

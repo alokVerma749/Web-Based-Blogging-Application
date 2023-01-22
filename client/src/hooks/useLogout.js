@@ -6,10 +6,8 @@ export const useLogout = () => {
         throw new Error('user not exists')
     }
     const logout = async () => {
+        // const token = localStorage.removeItem('user')
         await setUser(null)
-        const token = localStorage.removeItem('user')
-        if (!token) {
-        }
         localStorage.removeItem('user')
     }
     return { logout }

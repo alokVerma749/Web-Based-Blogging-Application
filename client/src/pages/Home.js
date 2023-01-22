@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useFetchAllBlogs } from '../hooks/useFetchAllBlog.js'
+import { AllBlogsContext } from "../contexts/AllBlogsContext.js"
+import { useContext } from "react"
 
 const Home = () => {
+  const { blogs } = useContext(AllBlogsContext)
+  const { fetchAllBlogs } = useFetchAllBlogs()
+  useEffect(() => {
+    const loadBlogs = async () => {
+      await fetchAllBlogs()
+    }
+    loadBlogs()
+  }, [])
+
   return (
     <section className="py-6 sm:py-12 bg-gray-100 text-gray-800">
       <div className="container p-6 mx-auto space-y-8">

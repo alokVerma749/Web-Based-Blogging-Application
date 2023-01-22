@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import MyBlogs from './pages/MyBlogs'
 import NotFound from './pages/NotFound'
+import Editor from './pages/Editor';
 import { AuthContext } from './contexts/AuthContext';
 import { useContext } from 'react'
 
@@ -27,6 +28,10 @@ function App() {
         <Route
           path="/auth/login"
           element={!user ? <Login /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/user/createblog"
+          element={user ? <Editor /> : <Navigate to="/auth" />}
         />
         <Route
           path="*"

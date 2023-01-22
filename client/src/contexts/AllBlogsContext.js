@@ -1,15 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
-const BlogsContext = createContext()
+export const AllBlogsContext = createContext()
 
-const BlogsContextProvider = ({ children }) => {
+export const AllBlogsContextProvider = ({ children }) => {
     const [blogs, setBlogs] = useState({})
-    useEffect(() => {
-        
-    })
+    const [isLoading, setIsLoading] = useState(false)
     return (
-        <BlogsContext.Provider>
+        <AllBlogsContext.Provider value={{ blogs, setBlogs, isLoading, setIsLoading }}>
             {children}
-        </BlogsContext.Provider>
+        </AllBlogsContext.Provider>
     )
 }
