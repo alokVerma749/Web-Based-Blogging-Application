@@ -2,7 +2,7 @@ import { AuthContext } from "../contexts/AuthContext.js"
 import { useContext } from "react"
 
 export const useLogin = () => {
-    const { setUser } = useContext(AuthContext)
+    const { dispatch } = useContext(AuthContext)
     const login = async (credentials) => {
         const response = await fetch('/auth/login', {
             method: 'POST',
@@ -13,7 +13,10 @@ export const useLogin = () => {
         if (response.ok) {
             const token = await json.token
             localStorage.setItem('user', JSON.stringify(token))
-            setUser(token)
+            dispatch({
+                type: "LOGIN",
+                payload: token
+            })
         }
     }
     return { login }

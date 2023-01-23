@@ -8,12 +8,10 @@ export const useFetchAllBlogs = () => {
             const response = await fetch('/', {
                 headers: { 'Content-Type': 'appication/json' }
             })
-            const json = await response.json()
-            console.log(json)
             if (response.ok) {
-                const data = response.blogs
+                const json = await response.json()
+                const data = await json.blogs
                 setBlogs(data)
-                console.log(data)
             }
         }
         return ({ fetchAllBlogs })
