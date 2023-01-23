@@ -53,6 +53,7 @@ export const login = async (req, res) => {
                 message: 'User not found'
             })
         }
+        const userName = user.name
         const comparePassword = await user.comparePassword(password)
         if (!comparePassword) {
             return res.status(400).json({
@@ -70,7 +71,8 @@ export const login = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'signin success',
-            token
+            token,
+            userName
         })
     } catch (error) {
         return res.status(500).json({

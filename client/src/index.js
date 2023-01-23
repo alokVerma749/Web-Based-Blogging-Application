@@ -5,6 +5,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthContextProvider } from './contexts/AuthContext.js'
 import { AllBlogsContextProvider } from './contexts/AllBlogsContext.js'
+import { UserBlogsContextProvider } from './contexts/UserBlogsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,9 @@ root.render(
     <BrowserRouter>
       <AuthContextProvider>
         <AllBlogsContextProvider>
-          <App />
+          <UserBlogsContextProvider>
+            <App />
+          </UserBlogsContextProvider>
         </AllBlogsContextProvider>
       </AuthContextProvider>
     </BrowserRouter>

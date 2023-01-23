@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useContext } from "react"
-import { AuthContext } from "../contexts/AuthContext.js"
+import { AuthContext } from "../../contexts/AuthContext.js"
 
 const Editor = () => {
     const { user } = useContext(AuthContext)
@@ -17,7 +17,6 @@ const Editor = () => {
     const submitData = async () => {
         await fetch('/user/', {
             method: 'POST',
-            // headers: { 'Content-Type': 'application/json' },
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('user')}`,
                 'Content-Type': 'application/json'

@@ -27,8 +27,7 @@ const authorise = async (req, res, next) => {
             })
         }
         req.user = {
-            userid: id,
-            name: name
+            userid: id
         }
         next()
     } catch (error) {
