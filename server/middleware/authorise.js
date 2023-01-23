@@ -3,7 +3,6 @@ import User from '../models/User.js'
 
 const authorise = async (req, res, next) => {
     try {
-        console.log('auth')
         const { authorization } = req.headers
         const token = authorization ? authorization.split(' ')[1] : req.body.user_id
         if (!token) {
