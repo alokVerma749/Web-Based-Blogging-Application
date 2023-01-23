@@ -2,16 +2,26 @@ import { AllBlogsContext } from "../contexts/AllBlogsContext.js"
 import { useContext } from "react"
 
 export const useFetchAllBlogs = () => {
-    const { setBlogs } = useContext(AllBlogsContext)
+    const { dispatch } = useContext(AllBlogsContext)
     try {
+        dispatch({
+            payload: {
+                blogs: [],
+                fetching: true
+            }
+        })
         const fetchAllBlogs = async () => {
-            const response = await fetch('/', {
-                headers: { 'Content-Type': 'appication/json' }
-            })
+            const response = await fetch('/getallblogs')
             if (response.ok) {
                 const json = await response.json()
                 const data = await json.blogs
-                setBlogs(data)
+                dispatch({
+                    type: 'SET_BLOGS',
+                    payload: {
+                        blogs: data,
+                        fetching: false
+                    }
+                })
             }
         }
         return ({ fetchAllBlogs })
