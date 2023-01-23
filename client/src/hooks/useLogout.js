@@ -5,7 +5,10 @@ export const useLogout = () => {
     const logout = async () => {
         await dispatch({
             type: 'LOGOUT',
-            payload: null
+            payload: {
+                token: null,
+                userName: 'USER'
+            }
         })
         localStorage.removeItem('user')
     }

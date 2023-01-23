@@ -12,10 +12,14 @@ export const useLogin = () => {
         const json = await response.json()
         if (response.ok) {
             const token = await json.token
+            const userName = await json.userName
             localStorage.setItem('user', JSON.stringify(token))
             dispatch({
                 type: "LOGIN",
-                payload: token
+                payload: {
+                    token: token,
+                    userName: userName
+                }
             })
         }
     }

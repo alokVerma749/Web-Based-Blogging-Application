@@ -12,7 +12,6 @@ const MyBlogs = () => {
     useEffect(() => {
         loadBlogs()
     }, [])
-    console.log(userBlogs)
     return (
         <section className="py-6 sm:py-12 bg-gray-100 text-gray-800">
             <div className="container p-6 mx-auto space-y-8">

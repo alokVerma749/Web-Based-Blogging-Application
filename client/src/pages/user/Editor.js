@@ -17,7 +17,6 @@ const Editor = () => {
     const submitData = async () => {
         await fetch('/user/', {
             method: 'POST',
-            // headers: { 'Content-Type': 'application/json' },
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('user')}`,
                 'Content-Type': 'application/json'

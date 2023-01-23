@@ -16,9 +16,7 @@ const Signup = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(credentials)
             })
-            console.log(response)
-            const json = await response.json()
-            console.log(json)
+            await response.json()
             if (!response.ok) {
                 console.log('signup success')
                 navigate('/auth/login')
