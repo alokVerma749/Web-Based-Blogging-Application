@@ -7,12 +7,11 @@ import { AuthContext } from "../../contexts/AuthContext.js"
 const MyBlogs = () => {
     const { fetchBlogs } = useFetchUserBlogs()
     const { userBlogs } = useContext(UserBlogsContext)
-    const { userName, dispatch } = useContext(AuthContext)
+    const { login, dispatch } = useContext(AuthContext)
     const loadBlogs = async () => {
         await fetchBlogs()
     }
     useEffect(() => {
-        console.log(userName)
         loadBlogs()
     }, [])
     return (

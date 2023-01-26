@@ -3,15 +3,14 @@ import User from '../models/User.js'
 
 const authorise = async (req, res, next) => {
     try {
-        const { authorization } = req.headers
-        const token = authorization ? authorization.split(' ')[1] : req.body.user_id
+        const token = req.cookies.token
         if (!token) {
             return res.status(400)({
                 success: false,
                 message: 'token not found'
             })
         }
-        const response = jwt.verify(JSON.parse(token), process.env.JWT_SECRET)
+        const response = jwt.verify(token, process.env.JWT_SECRET)
         if (!response) {
             return res.status(400)({
                 success: false,
