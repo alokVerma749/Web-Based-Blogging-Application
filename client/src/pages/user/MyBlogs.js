@@ -2,14 +2,17 @@ import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useFetchUserBlogs } from '../../hooks/useFetchUserBlogs.js'
 import { UserBlogsContext } from "../../contexts/UserBlogsContext.js"
+import { AuthContext } from "../../contexts/AuthContext.js"
 
 const MyBlogs = () => {
     const { fetchBlogs } = useFetchUserBlogs()
     const { userBlogs } = useContext(UserBlogsContext)
+    const { userName, dispatch } = useContext(AuthContext)
     const loadBlogs = async () => {
         await fetchBlogs()
     }
     useEffect(() => {
+        console.log(userName)
         loadBlogs()
     }, [])
     return (

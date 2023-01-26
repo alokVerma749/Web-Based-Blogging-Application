@@ -6,12 +6,34 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import MyBlogs from './pages/user/MyBlogs'
 import NotFound from './pages/NotFound'
-import Editor from './pages/user/Editor';
-import { AuthContext } from './contexts/AuthContext';
-import { useContext } from 'react'
+import Editor from './pages/user/Editor.js';
+import { AuthContext } from './contexts/AuthContext.js';
+import { useContext, useEffect } from 'react'
 
 function App() {
-  const { token } = useContext(AuthContext)
+  const { login, dispatch } = useContext(AuthContext)
+  const checkAuth = async () => {
+    try {
+      const response = await fetch('/auth/auth-status');
+      const data = await response.json();
+      if (data.status === true) {
+        await dispatch({
+          type: 'LOGIN',
+          payload: true
+        })
+      } else {
+        await dispatch({
+          type: 'LOGIN',
+          payload: false
+        })
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    checkAuth()
+  }, [])
   return (
     <>
       <Navbar />
@@ -19,27 +41,26 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/user"
-          element={token ? <MyBlogs /> : <Navigate to="/auth" />}
+          element={login ? <MyBlogs /> : <Navigate to="/auth" />}
         />
         <Route
           path="/auth"
-          element={!token ? <Signup /> : <Navigate to="/" />}
+          element={!login ? <Signup /> : <Navigate to="/" />}
         />
         <Route
           path="/auth/login"
-          element={!token ? <Login /> : <Navigate to="/" />}
+          element={!login ? <Login /> : <Navigate to="/" />}
         />
         <Route
           path="/user/createblog"
-          element={token ? <Editor /> : <Navigate to="/auth" />}
+          element={login ? <Editor /> : <Navigate to="/auth" />}
         />
         <Route
           path="*"
-          element={token ? <NotFound /> : <Navigate to="/auth" />}
+          element={login ? <NotFound /> : <Navigate to="/auth" />}
         />
       </Routes>
     </>
-
   );
 }
 
