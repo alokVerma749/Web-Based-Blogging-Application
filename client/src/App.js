@@ -19,12 +19,18 @@ function App() {
       if (data.status === true) {
         await dispatch({
           type: 'LOGIN',
-          payload: true
+          payload: {
+            login: data.status,
+            name: data.name
+          }
         })
       } else {
         await dispatch({
           type: 'LOGIN',
-          payload: false
+          payload: {
+            status: data.status,
+            name: data.name
+          }
         })
       }
     } catch (err) {
@@ -33,7 +39,8 @@ function App() {
   }
   useEffect(() => {
     checkAuth()
-  }, [])
+    console.log('i ran ' + login)
+  }, [login])
   return (
     <>
       <Navbar />

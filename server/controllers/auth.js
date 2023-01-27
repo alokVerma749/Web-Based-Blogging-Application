@@ -95,25 +95,33 @@ export const logout = async (req, res) => {
     })
 }
 export const authStatus = async (req, res) => {
-    // check if the user has a "token" cookie
-    const token = req.cookies.token;
-    if (token) {
-        const isAuthenticated = checkTokenValidity(token);
-        if (isAuthenticated) {
-            res.json({ status: true });
-        } else {
-            res.json({ status: false });
+    try {
+        const token = req.cookies.token;
+        if (token) {
+            const isAuthenticated = await checkTokenValidity(token);
+            if (isAuthenticated) {
+                return res.json({ status: true, name: isAuthenticated.name });
+            }
         }
-    } else {
-        res.json({ status: false });
+        res.json({ status: false, name: isAuthenticated.name });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: 'token not found'
+        })
     }
 }
-
+// for use of authStatus controller only
 async function checkTokenValidity(token) {
-    // this function would typically check the token against a database or JWT library
     const decoded = await jwt.verify(token, process.env.JWT_SECRET)
     if (decoded) {
-        return true
+        return {
+            name: decoded.name,
+            status: true
+        }
     }
-    return false;
+    return {
+        name: 'User',
+        status: false
+    };
 }
